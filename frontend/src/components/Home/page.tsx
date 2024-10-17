@@ -1,4 +1,3 @@
-// frontend/StartingFiles/index.js
 'use client';
 
 import React, { useState } from 'react';
@@ -7,7 +6,7 @@ const StartingFile = () => {
     const [prompt, setPrompt] = useState('');
     const [response, setResponse] = useState('');
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState('');
+    const [error, setError] = useState<string>('');
 
     const handleGenerate = async () => {
         setLoading(true);
@@ -26,8 +25,12 @@ const StartingFile = () => {
 
             const data = await res.json();
             setResponse(data.content || 'No response received');
-        } catch (error : any) {
-            setError(error.message);
+        } catch (error) {
+            if (error instanceof Error) {
+                setError(error.message);
+            } else {
+                setError('An unknown error occurred');
+            }
         } finally {
             setLoading(false);
         }
