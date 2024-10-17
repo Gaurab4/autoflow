@@ -13,7 +13,7 @@ const StartingFile = () => {
         setLoading(true);
         setError('');
         try {
-            const res = await fetch('http://localhost:5001/api/generate', {
+            const res = await fetch(process.env.NEXT_PUBLIC_BACKEND_PORT + `/api/generate`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -26,7 +26,7 @@ const StartingFile = () => {
 
             const data = await res.json();
             setResponse(data.content || 'No response received');
-        } catch (error) {
+        } catch (error : any) {
             setError(error.message);
         } finally {
             setLoading(false);

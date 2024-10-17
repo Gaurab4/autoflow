@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const Groq = require('groq-sdk'); // Import the Groq SDK
+const Groq = require('groq-sdk'); 
 
 dotenv.config();
 
@@ -9,7 +9,6 @@ const PORT = process.env.PORT || 5001;
 
 app.use(express.json());
 
-// CORS middleware
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*');
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
