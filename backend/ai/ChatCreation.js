@@ -21,7 +21,6 @@ const client = new Groq({
 });
 
 
-// Async function for chat completion
 async function getGroqChatCompletion(prompt) {
   try {
     const response = await client.chat.completions.create({
