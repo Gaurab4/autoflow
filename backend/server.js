@@ -1,6 +1,6 @@
 const express = require('express');
 const dotenv = require('dotenv');
-const Groq = require('groq-sdk'); 
+const { getGroqChatCompletion } = require('./ai/ChatCreation');
 
 dotenv.config();
 
@@ -16,25 +16,7 @@ app.use((req, res, next) => {
     next();
 });
 
-// Initialize Groq client
-const client = new Groq({
-    apiKey: process.env.GROQ_API_KEY, 
-});
 
-// Function to get chat completion from Groq
-async function getGroqChatCompletion(prompt) {
-    return client.chat.completions.create({
-        messages: [
-          {
-            role: "user",
-            content: prompt,
-          },
-        ],
-        model: "llama3-8b-8192",
-      });
-}
-
-// Endpoint to handle chat completions
 app.post('/api/generate', async (req, res) => {
     const { prompt } = req.body;
 
