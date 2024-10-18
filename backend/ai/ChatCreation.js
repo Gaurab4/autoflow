@@ -1,20 +1,6 @@
 const Groq = require("groq-sdk");
 const dotenv = require('dotenv');
 dotenv.config();
-const fs = require('fs');
-const path = require('path');
-
-
-
-const promptFilePath = path.resolve(__dirname, 'prompt.txt');
-
-let promptFromFile = '';
-
-try {
-  promptFromFile = fs.readFileSync(promptFilePath, 'utf-8');
-} catch (error) {
-  console.error("Error reading prompt.txt file:", error);
-}
 
 const client = new Groq({
   apiKey: process.env.GROQ_API_KEY, 
@@ -27,7 +13,7 @@ async function getGroqChatCompletion(prompt) {
       messages: [
         {
           role: "user",
-          content: `${promptFromFile} User query: "${prompt}"`,
+          content: `You are a flowchart generation assistant. Only handle queries related to workflow processes like 'login process' or 'user registration'. If the user asks something unrelated, kindly decline. User query: "${prompt}"`,
         },
       ],
       model: "llama3-8b-8192",
